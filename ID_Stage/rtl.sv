@@ -22,9 +22,9 @@ module id_stage (
     output logic        mux_inp
 );
 
-    logic [4:0] rs1;
-    logic [4:0] rs2;
-    logic [4:0] rd;
+    logic [4:0]  rs1;
+    logic [4:0]  rs2;
+    logic [4:0]  rd;
 
     logic [11:0] imm;
     logic [19:0] imm_uj;
@@ -37,46 +37,48 @@ module id_stage (
         .rs1         (rs1),
         .rs2         (rs2),
         .rd          (rd),
-        .imm         (imm),
-        .imm_uj      (imm_uj),
-        .fn3         (fn3_out_d),
         .opcode      (opcode_out_d),
         .imm11_5     (imm11_5),
+        .fn3         (fn3_out_d),
+        .imm         (imm),
+        .imm_uj      (imm_uj),
         .fn7_5       (fn7_5)
     );
 
     // Immediate generator
     imm_generator immgen (
-        .imm         (imm),
-        .imm_uj      (imm_uj),
-        .opcode      (opcode_out_d),
-        .imm_out     (imm_out)
+        .imm_input    (imm),
+        .fn3          (fn3_out_d),
+        .opcode       (opcode_out_d),
+        .imm_input_uj (imm_uj),
+        .imm_output   (imm_out)
     );
 
     // Register file
     register_file rf (
-        .clk      (clk),
-        .reset    (reset),
-        .we       (reg_write && !stall),
-        .rs1      (rs1),
-        .rs2      (rs2),
-        .rd       (rd),
-        .wb_data  (wb_data),
-        .rs1_data (rs1_data),
-        .rs2_data (rs2_data)
+        .rs1_sel   (rs1),
+        .rs2_sel   (rs2),
+        .reg_write (reg_write && !stall),
+        .clk       (clk),
+        .reset     (reset),
+        .wb_data   (wb_data),
+        .rd_sel    (rd),
+        .rs1_data  (rs1_data),
+        .rs2_data  (rs2_data)
     );
 
     // Main control
     main_control control (
         .opcode    (opcode_out_d),
-        .aluop     (aluop),
+        .fn3       (fn3_out_d),
         .memtoreg  (memtoreg),
         .branch    (branch),
-        .mem_write (mem_write),
-        .mem_read  (mem_read),
-        .alu_src   (alu_src),
         .mux_inp   (mux_inp),
-        .reg_write (reg_write)
+        .memread   (mem_read),
+        .memwrite  (mem_write),
+        .alusrc    (alu_src),
+        .reg_write (reg_write),
+        .aluop     (aluop)
     );
 
 endmodule
