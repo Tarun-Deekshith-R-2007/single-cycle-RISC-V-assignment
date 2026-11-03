@@ -12,7 +12,6 @@ module decoder (
 );
 
     always_comb begin
-        // Default values
         rs1      = 5'b0;
         rs2      = 5'b0;
         rd       = 5'b0;
@@ -25,7 +24,6 @@ module decoder (
 
         case (instruction[6:0])
 
-            // R-type
             7'b0110011: begin
                 rd     = instruction[11:7];
                 fn3    = instruction[14:12];
@@ -34,7 +32,6 @@ module decoder (
                 fn7_5  = instruction[30];
             end
 
-            // I-type ALU
             7'b0010011: begin
                 rd      = instruction[11:7];
                 fn3     = instruction[14:12];
@@ -43,7 +40,6 @@ module decoder (
                 imm11_5 = instruction[31:25];
             end
 
-            // Load
             7'b0000011: begin
                 rd  = instruction[11:7];
                 fn3 = instruction[14:12];
@@ -51,7 +47,6 @@ module decoder (
                 imm = instruction[31:20];
             end
 
-            // Store
             7'b0100011: begin
                 fn3 = instruction[14:12];
                 rs1 = instruction[19:15];
@@ -59,7 +54,6 @@ module decoder (
                 imm = {instruction[31:25], instruction[11:7]};
             end
 
-            // Branch
             7'b1100011: begin
                 fn3 = instruction[14:12];
                 rs1 = instruction[19:15];
@@ -72,7 +66,6 @@ module decoder (
                 };
             end
 
-            // JAL
             7'b1101111: begin
                 rd = instruction[11:7];
                 imm_uj = {
@@ -83,7 +76,6 @@ module decoder (
                 };
             end
 
-            // JALR
             7'b1100111: begin
                 rd  = instruction[11:7];
                 fn3 = instruction[14:12];
@@ -91,19 +83,15 @@ module decoder (
                 imm = instruction[31:20];
             end
 
-            // LUI
             7'b0110111: begin
                 rd     = instruction[11:7];
                 imm_uj = instruction[31:12];
             end
 
-            // AUIPC
             7'b0010111: begin
                 rd     = instruction[11:7];
                 imm_uj = instruction[31:12];
             end
-
-            // Unsupported instructions retain default values
             default: begin
             end
 
