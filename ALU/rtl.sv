@@ -1,4 +1,3 @@
-```systemverilog
 module alu #(
     parameter int DATA_WIDTH = 32
 )(
@@ -57,4 +56,3 @@ module alu #(
     end
 
 endmodule
-```
