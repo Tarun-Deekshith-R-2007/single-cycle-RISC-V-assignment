@@ -1,6 +1,3 @@
-**File:** `Immediate_Generator/rtl.sv`
-
-```systemverilog
 module imm_generator (
     input  logic [11:0] imm_input,
     input  logic [2:0]  fn3,
@@ -45,4 +42,4 @@ module imm_generator (
     end
 
 endmodule
-```
+
