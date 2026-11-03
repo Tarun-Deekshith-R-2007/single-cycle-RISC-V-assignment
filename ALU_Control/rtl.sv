@@ -1,4 +1,3 @@
-```systemverilog
 module alu_control (
     input  logic [2:0] alu_op,
     input  logic [2:0] fn3,
@@ -72,4 +71,4 @@ module alu_control (
     end
 
 endmodule
-```
+
