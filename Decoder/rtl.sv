@@ -1,4 +1,3 @@
-```systemverilog
 module decoder (
     input  logic [31:0] instruction,
     output logic [4:0]  rs1,
@@ -112,4 +111,4 @@ module decoder (
     end
 
 endmodule
-```
+
