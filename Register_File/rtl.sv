@@ -1,6 +1,3 @@
-**File:** `Register_File/rtl.sv`
-
-```systemverilog
 module register_file (
     input  logic [4:0]  rs1_sel,
     input  logic [4:0]  rs2_sel,
@@ -41,4 +38,4 @@ module register_file (
     end
 
 endmodule
-```
+
