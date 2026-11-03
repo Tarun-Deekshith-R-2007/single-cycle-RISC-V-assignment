@@ -32,11 +32,11 @@ module ex_stage (
                         (opcode == 7'h67);
 
     alu_control alu_control_unit (
-        .aluop(aluop),
+        .alu_op(aluop),
         .fn3(fn3),
         .imm11_5(imm11_5),
         .fn7_5(fn7_5),
-        .alu_control(alu_control)
+        .control_out(alu_control)
     );
 
     alu alu_unit (
