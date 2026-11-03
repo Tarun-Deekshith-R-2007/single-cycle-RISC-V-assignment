@@ -9,25 +9,24 @@ module alu #(
 );
 
     always_comb begin
-        // Default outputs
+
         alu_out = '0;
         zero    = 1'b0;
 
         case (alu_control)
 
-            // Arithmetic and logical operations
+
             5'b00000: alu_out = rs1_data + rs2_data;
             5'b00001: alu_out = rs1_data - rs2_data;
             5'b00010: alu_out = rs1_data ^ rs2_data;
             5'b00011: alu_out = rs1_data | rs2_data;
             5'b00100: alu_out = rs1_data & rs2_data;
 
-            // Shift operations
             5'b00101: alu_out = rs1_data << rs2_data[4:0];
             5'b00110: alu_out = rs1_data >> rs2_data[4:0];
             5'b00111: alu_out = $signed(rs1_data) >>> rs2_data[4:0];
 
-            // Set less than
+
             5'b01000:
                 alu_out = ($signed(rs1_data) < $signed(rs2_data))
                           ? {{(DATA_WIDTH-1){1'b0}}, 1'b1}
@@ -38,7 +37,7 @@ module alu #(
                           ? {{(DATA_WIDTH-1){1'b0}}, 1'b1}
                           : '0;
 
-            // Branch comparisons
+
             5'b01010: zero = (rs1_data == rs2_data); 
             5'b01011: zero = (rs1_data != rs2_data);
             5'b01100: zero = ($signed(rs1_data) < $signed(rs2_data));
@@ -46,7 +45,6 @@ module alu #(
             5'b01110: zero = (rs1_data < rs2_data);
             5'b01111: zero = (rs1_data >= rs2_data);
 
-            // Unused operations
             default: begin
                 alu_out = '0;
                 zero    = 1'b0;
