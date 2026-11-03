@@ -1,4 +1,3 @@
-```systemverilog
 module if_stage (
     input  logic        clk,
     input  logic        reset,
@@ -26,4 +25,3 @@ module if_stage (
     end
 
 endmodule
-```
