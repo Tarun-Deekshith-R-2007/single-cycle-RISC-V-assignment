@@ -13,7 +13,6 @@ module main_control (
 
     always_comb begin
 
-        // Default values for unsupported instructions
         memtoreg = 2'b00;
         branch   = 1'b0;
         mux_inp  = 1'b0;
@@ -25,20 +24,17 @@ module main_control (
 
         case (opcode)
 
-            // R-type
             7'b0110011: begin
                 reg_write = 1'b1;
                 aluop     = 3'b000;
             end
 
-            // I-type ALU
             7'b0010011: begin
                 alusrc    = 1'b1;
                 reg_write = 1'b1;
                 aluop     = 3'b001;
             end
 
-            // Load
             7'b0000011: begin
                 memtoreg  = 2'b01;
                 memread   = 1'b1;
@@ -47,7 +43,6 @@ module main_control (
                 aluop     = 3'b010;
             end
 
-            // Store
             7'b0100011: begin
                 memtoreg = 2'b11;
                 memwrite = 1'b1;
@@ -55,13 +50,11 @@ module main_control (
                 aluop    = 3'b011;
             end
 
-            // Branch
             7'b1100011: begin
                 branch = 1'b1;
                 aluop  = 3'b100;
             end
 
-            // JAL
             7'b1101111: begin
                 memtoreg  = 2'b10;
                 alusrc    = 1'b1;
@@ -69,7 +62,6 @@ module main_control (
                 aluop     = 3'b110;
             end
 
-            // JALR
             7'b1100111: begin
                 memtoreg  = 2'b10;
                 mux_inp   = 1'b1;
@@ -78,7 +70,6 @@ module main_control (
                 aluop     = 3'b001;
             end
 
-            // LUI
             7'b0110111: begin
                 memtoreg  = 2'b10;
                 alusrc    = 1'b1;
@@ -86,7 +77,6 @@ module main_control (
                 aluop     = 3'b110;
             end
 
-            // AUIPC
             7'b0010111: begin
                 memtoreg  = 2'b10;
                 alusrc    = 1'b1;
@@ -95,7 +85,6 @@ module main_control (
             end
 
             default: begin
-                // Keep all default control signals
             end
 
         endcase
