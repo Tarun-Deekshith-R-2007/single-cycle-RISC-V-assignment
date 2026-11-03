@@ -30,7 +30,6 @@ module id_stage (
 
     logic reg_write;
 
-    // Instruction decoder
     decoder dec (
         .instruction (instruction),
         .rs1         (rs1),
@@ -44,7 +43,6 @@ module id_stage (
         .fn7_5       (fn7_5)
     );
 
-    // Immediate generator
     imm_generator immgen (
         .imm_input    (imm),
         .fn3          (fn3_out_d),
@@ -53,7 +51,6 @@ module id_stage (
         .imm_output   (imm_out)
     );
 
-    // Register file
     register_file rf (
         .rs1_sel   (rs1),
         .rs2_sel   (rs2),
@@ -66,7 +63,6 @@ module id_stage (
         .rs2_data  (rs2_data)
     );
 
-    // Main control
     main_control control (
         .opcode    (opcode_out_d),
         .fn3       (fn3_out_d),
