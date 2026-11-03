@@ -1,4 +1,3 @@
-```systemverilog
 module id_stage (
     input  logic        clk,
     input  logic        reset,
@@ -82,4 +81,4 @@ module id_stage (
     );
 
 endmodule
-```
+
